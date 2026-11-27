@@ -50,7 +50,8 @@ Phần dùng chung:
 - `A4Page`, `SheetHeader`, `AnswerKeyPage`, `paginate()`, `packByHeight()`: dựng trang. Nội dung tràn
   trang bị cắt, công cụ phải tự chia trang.
 
-- `AnswerPages` cho trang đáp án; `splitSyllable()` tách âm đầu và vần.
+- `AnswerPages` cho trang đáp án dạng chữ, `AnswerGrids` cho đáp án dạng hình (4 phiếu/trang);
+  `splitSyllable()` tách âm đầu và vần.
 - `ToolLayout paper={...}` cho khổ khác A4; `useClassStore()` và `ClassListPanel` cho danh sách
   lớp dùng chung (IndexedDB); `ImageField` cho logo; `usePresenting()` cho phím khi trình chiếu.
 
@@ -74,7 +75,7 @@ trong PDF: vẽ bằng viền hoặc SVG.
 
 ## Chưa làm
 
-54 công cụ còn lại (đã xong `phieu-toan`, `phieu-tieng-viet`, `tinh-diem-xep-loai`, `giay-o-ly`,
-`chia-nhom`, `tao-ma-qr`), tài khoản và quản trị (PRD mục 6–7), PWA offline, font tập viết HP001,
+52 công cụ còn lại (đã xong `phieu-toan`, `phieu-tieng-viet`, `tinh-diem-xep-loai`, `giay-o-ly`,
+`chia-nhom`, `tao-ma-qr`, `o-chu-tim-tu`, `to-mau-theo-phep-tinh`), tài khoản và quản trị (PRD mục 6–7), PWA offline, font tập viết HP001,
 xuất Word. Email liên hệ để trống trong
 [src/core/site.ts](src/core/site.ts) nên form Góp ý chưa bật.

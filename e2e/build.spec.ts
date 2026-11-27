@@ -50,6 +50,8 @@ for (const [slug, stored, expected] of [
   ['giay-o-ly', { page: 'a5', pages: 2 }, '2 trang A5'],
   ['chia-nhom', { by: 'size' }, 'Số em mỗi nhóm (tối đa)'],
   ['tao-ma-qr', { link: 'a.vn', perPage: 4 }, '1 trang A4'],
+  ['o-chu-tim-tu', { kind: 'o-chu' }, 'Hàng ngang'],
+  ['to-mau-theo-phep-tinh', { cells: 100, copies: 2 }, '3 trang A4'],
 ] as const) {
   test(`${slug}: dựng sẵn và hydrate với tùy chọn đã lưu`, async ({ page, request }) => {
     const html = await (await request.get(`/${slug}`)).text();
