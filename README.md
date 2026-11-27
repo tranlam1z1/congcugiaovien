@@ -75,7 +75,9 @@ trong PDF: vẽ bằng viền hoặc SVG.
 
 ## Chưa làm
 
-51 công cụ còn lại (đã xong `phieu-toan`, `phieu-tieng-viet`, `tinh-diem-xep-loai`, `giay-o-ly`,
-`chia-nhom`, `tao-ma-qr`, `o-chu-tim-tu`, `to-mau-theo-phep-tinh`, `cong-cu-tren-lop`), tài khoản và quản trị (PRD mục 6–7), PWA offline, font tập viết HP001,
+50 công cụ còn lại (đã xong `phieu-toan`, `phieu-tieng-viet`, `tinh-diem-xep-loai`, `giay-o-ly`,
+`chia-nhom`, `tao-ma-qr`, `o-chu-tim-tu`, `to-mau-theo-phep-tinh`, `cong-cu-tren-lop`, `tap-viet-chu`), tài khoản và quản trị (PRD mục 6–7), PWA offline, font tập viết HP001
+(`tap-viet-chu` đang dùng Playwrite VN, đổi ở
+[handwriting.ts](src/tools/tap-viet-chu/handwriting.ts)),
 xuất Word. Email liên hệ để trống trong
 [src/core/site.ts](src/core/site.ts) nên form Góp ý chưa bật.

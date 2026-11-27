@@ -53,6 +53,7 @@ for (const [slug, stored, expected] of [
   ['o-chu-tim-tu', { kind: 'o-chu' }, 'Hàng ngang'],
   ['to-mau-theo-phep-tinh', { cells: 100, copies: 2 }, '3 trang A4'],
   ['cong-cu-tren-lop', { tab: 'dem-nguoc', minutes: 7 }, '7:00'],
+  ['tap-viet-chu', { text: 'mẹ', students: 'An\nBình' }, '2 trang A4'],
 ] as const) {
   test(`${slug}: dựng sẵn và hydrate với tùy chọn đã lưu`, async ({ page, request }) => {
     const html = await (await request.get(`/${slug}`)).text();
