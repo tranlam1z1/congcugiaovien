@@ -1,0 +1,369 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * "Sổ tay sắc màu": nền trắng ấm, nhấn cam, mỗi nhóm công cụ một màu pastel.
+ * Cam của nút và chữ đậm hơn bản mẫu (#ea580c) để đạt tương phản WCAG AA.
+ */
+:root {
+  color-scheme: light;
+  --bg: #fffdf9;
+  --surface: #ffffff;
+  --subtle: #fff7ed;
+  --soft: #ffedd5;
+  --desk: #f1e9e1;
+  --hover: #fff1e0;
+  --ink: #1c1917;
+  --muted: #69605b;
+  --line: #e7e5e4;
+  --accent: #c2410c;
+  --accent-hover: #9a3412;
+  --on-accent: #ffffff;
+  --card-shadow: 0 6px 20px rgb(234 88 12 / 0.07);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #1c1815;
+  --surface: #272220;
+  --subtle: #221d1a;
+  --soft: #4a2a15;
+  --desk: #12100e;
+  --hover: #352e2a;
+  --ink: #f6f1ec;
+  --muted: #beb3aa;
+  --line: #453c36;
+  --accent: #fb923c;
+  --accent-hover: #fdba74;
+  --on-accent: #1c1008;
+  --card-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+/* Màu nhận diện 8 nhóm công cụ. */
+[data-group='phieu-bai-tap'] {
+  --tint-light: #dbeafe;
+  --tint-dark: #1e40af;
+}
+[data-group='de-kiem-tra'] {
+  --tint-light: #fce7f3;
+  --tint-dark: #9d174d;
+}
+[data-group='tro-choi'] {
+  --tint-light: #f3e8ff;
+  --tint-dark: #6b21a8;
+}
+[data-group='giay-tap-viet'] {
+  --tint-light: #dcfce7;
+  --tint-dark: #166534;
+}
+[data-group='quan-ly-lop'] {
+  --tint-light: #ccfbf1;
+  --tint-dark: #115e59;
+}
+[data-group='the-bang'] {
+  --tint-light: #fef3c7;
+  --tint-dark: #92400e;
+}
+[data-group='to-mau-ve'] {
+  --tint-light: #ffe4e6;
+  --tint-dark: #9f1239;
+}
+[data-group='tien-ich'] {
+  --tint-light: #e0e7ff;
+  --tint-dark: #3730a3;
+}
+
+@theme inline {
+  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-desk: var(--desk);
+  --color-hover: var(--hover);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  button,
+  summary,
+  select {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1232px; /* 1200px nội dung + lề 16px hai bên */
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .heading-1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .heading-2 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  /* Nút thường dạng viền; mỗi màn hình chỉ một .btn-primary. Vùng bấm tối thiểu 44px. */
+  .btn {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    padding: 0.25rem 1rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .btn:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .btn-primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    border-color: var(--accent-hover);
+    background: var(--accent-hover);
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--surface);
+    box-shadow: var(--card-shadow);
+  }
+
+  /* Ô biểu tượng theo màu nhóm; giao diện tối đảo cặp màu. */
+  .tint {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: var(--tint-light, var(--soft));
+    color: var(--tint-dark, var(--accent));
+  }
+
+  :root[data-theme='dark'] .tint {
+    background: var(--tint-dark, var(--soft));
+    color: var(--tint-light, var(--accent));
+  }
+
+  .dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: var(--tint-dark);
+  }
+
+  :root[data-theme='dark'] .dot {
+    background: var(--tint-light);
+  }
+
+  /* Nút bật/tắt trong phiếu mẫu và bảng giá. */
+  .toggle {
+    min-height: 2.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    font-weight: 600;
+  }
+
+  .toggle:hover {
+    border-color: var(--accent);
+  }
+
+  .toggle[aria-pressed='true'] {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--soft);
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  /* Khối của landing page. */
+  .section {
+    padding-block: 3.5rem;
+  }
+
+  .band {
+    border-block: 1px solid var(--line);
+    background: var(--subtle);
+  }
+
+  .section-head {
+    display: flex;
+    max-width: 42rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .heading-section {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .hero-bg {
+    background: radial-gradient(circle at top left, var(--soft) 0%, var(--bg) 55%);
+  }
+
+  .btn-icon {
+    min-width: 2.75rem;
+    padding: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    padding-inline: 1rem;
+  }
+
+  .chip[aria-current] {
+    border-color: var(--accent);
+    border-width: 2px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-width: 1px;
+    border-color: var(--line);
+    border-radius: 0.375rem;
+    padding-inline: 0.5rem;
+  }
+
+  .input {
+    width: 100%;
+    min-height: 2.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.625rem;
+    background: var(--surface);
+    padding: 0.5rem 0.75rem;
+    color: var(--ink);
+  }
+
+  .input::placeholder {
+    color: var(--muted);
+  }
+
+  .drawer {
+    width: 100%;
+    max-width: 100%;
+    margin: auto 0 0;
+    border-radius: 1rem 1rem 0 0;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .drawer::backdrop {
+    background: rgb(0 0 0 / 0.45);
+  }
+
+  .stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    overflow: auto;
+    background: var(--surface);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  /* Trình chiếu: chữ tối thiểu 48px, nút lớn bấm được từ xa. */
+  .stage-full {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    justify-content: safe center;
+    background: var(--bg);
+    font-size: max(48px, 3vw);
+    line-height: 1.35;
+  }
+
+  .stage-full .btn {
+    min-height: 4rem;
+    padding-inline: 2rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

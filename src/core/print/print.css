@@ -1,0 +1,116 @@
+/* Trang A4: luôn nền trắng chữ đen, không phụ thuộc giao diện sáng/tối. */
+.print-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+  width: max-content;
+}
+
+.a4-page {
+  position: relative;
+  overflow: hidden;
+  flex: none;
+  background: #fff;
+  color: #000;
+  color-scheme: light;
+  font-family: var(--print-font, 'Be Vietnam Pro'), 'Be Vietnam Pro', sans-serif;
+  /* Font không có bản đậm/nghiêng thì không giả lập, vì PDF cũng không giả lập. */
+  font-synthesis: none;
+  font-size: 13pt;
+  line-height: calc(1.5 * var(--print-leading, 1));
+  text-align: left;
+  /* PDF xuất ra không áp kerning/ligature, tắt ở đây để hai bản khớp nhau. */
+  font-kerning: none;
+  font-variant-ligatures: none;
+  box-shadow: 0 1px 8px rgb(0 0 0 / 0.18);
+}
+
+.a4-page[data-large] {
+  font-size: 17pt;
+}
+
+/* Trang cho thầy cô (đáp án) luôn dùng font mặc định cho gọn. */
+.a4-page[data-plain] {
+  --print-leading: 1;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.sheet-header {
+  margin-bottom: 5mm;
+}
+
+.sheet-school {
+  font-size: 0.85em;
+}
+
+.sheet-name-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+}
+
+.sheet-blank {
+  flex: 1;
+  min-height: 1.5em;
+  padding-left: 2mm;
+  border-bottom: 1px dotted #000;
+  font-weight: 600;
+}
+
+.sheet-blank-short {
+  flex: 0 0 30mm;
+}
+
+.sheet-title {
+  margin-top: 3mm;
+  text-align: center;
+  font-size: 1.35em;
+  font-weight: 700;
+  line-height: calc(1.35 * var(--print-leading, 1));
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Có trang A4: chỉ giữ các trang và chuỗi phần tử cha của chúng. */
+  body:has(.a4-page) :not(.a4-page, .a4-page *, :has(.a4-page)) {
+    display: none !important;
+  }
+
+  body:has(.a4-page) :has(.a4-page) {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  .a4-page {
+    margin: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .a4-page:last-child {
+    break-after: auto;
+  }
+}
