@@ -1,7 +1,7 @@
 import { Pause, Play, RotateCcw } from 'lucide-react';
 import { formatTime } from './logic';
-import type { Countdown } from './useCountdown';
-import { usePresenterKeys } from './usePresenterKeys';
+import type { Countdown } from '@/core/present/useCountdown';
+import { usePresenterKeys } from '@/core/present/usePresenterKeys';
 
 const PRESETS = [1, 2, 3, 5, 10, 15];
 

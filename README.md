@@ -52,13 +52,17 @@ Phần dùng chung:
 
 - `AnswerPages` cho trang đáp án dạng chữ, `AnswerGrids` cho đáp án dạng hình (4 phiếu/trang);
   `splitSyllable()` tách âm đầu và vần.
-- `ToolLayout paper={...}` cho khổ khác A4; `useClassStore()` và `ClassListPanel` cho danh sách
+- `ToolLayout paper={...}` cho khổ khác A4, `editor={...}` cho phần sửa nội dung trên bản xem trước; `useClassStore()` và `ClassListPanel` cho danh sách
   lớp dùng chung (IndexedDB); `ImageField` cho logo; `usePresenting()` cho phím khi trình chiếu.
 
 Công cụ tập viết dùng chung [src/core/handwriting/](src/core/handwriting/): dựng chữ nối nét từ font
 (`cursive.ts`, `useHandwriting()`), ngắt dòng và giới hạn trang (`lines.ts`), màu và cỡ nét
 (`style.ts`). Chữ in tiếng Anh trên giấy 4 dòng tự vẽ ở
 [printFont.ts](src/tools/tap-viet-tieng-anh/printFont.ts).
+
+Công cụ trình chiếu dùng chung [src/core/present/](src/core/present/): phím và bút trình chiếu,
+đồng hồ đếm ngược, âm thanh, đọc to. Gói từ vựng và hình minh họa ở
+[src/core/vocab/](src/core/vocab/); gói nhiều file thành zip bằng [zip.ts](src/core/zip.ts).
 
 Công cụ không in (vd `tinh-diem-xep-loai`) đặt `mode: 'screen'` và tự dựng giao diện, không dùng
 `ToolLayout`.
@@ -80,9 +84,7 @@ trong PDF: vẽ bằng viền hoặc SVG.
 
 ## Chưa làm
 
-49 công cụ còn lại (đã xong `phieu-toan`, `phieu-tieng-viet`, `tinh-diem-xep-loai`, `giay-o-ly`,
-`chia-nhom`, `tao-ma-qr`, `o-chu-tim-tu`, `to-mau-theo-phep-tinh`, `cong-cu-tren-lop`,
-`tap-viet-chu`, `tap-viet-tieng-anh`), tài khoản và quản trị (PRD mục 6–7), PWA offline, font
-tập viết HP001 (`tap-viet-chu` đang dùng Playwrite VN, đổi ở
-[cursive.ts](src/core/handwriting/cursive.ts)), xuất Word. Email liên hệ để trống trong
+Giai đoạn 1 đã xong đủ 15 công cụ (PRD mục 8). Còn 45 công cụ của giai đoạn 2–4, tài khoản và
+quản trị (PRD mục 6–7), PWA offline, font tập viết HP001 (`tap-viet-chu` đang dùng Playwrite VN,
+đổi ở [cursive.ts](src/core/handwriting/cursive.ts)), xuất Word. Email liên hệ để trống trong
 [src/core/site.ts](src/core/site.ts) nên form Góp ý chưa bật.

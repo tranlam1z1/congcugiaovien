@@ -5,7 +5,7 @@
 import { Mic, MicOff } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { lightOf, noiseLevel, rms, smooth, type Light } from './logic';
-import { usePresenterKeys } from './usePresenterKeys';
+import { usePresenterKeys } from '@/core/present/usePresenterKeys';
 
 type Status = 'off' | 'asking' | 'on';
 

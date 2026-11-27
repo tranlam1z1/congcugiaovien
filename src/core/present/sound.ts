@@ -33,3 +33,24 @@ export function ring() {
     }
   }
 }
+
+/** Tiếng báo trả lời đúng (hai nốt đi lên) hoặc sai (một nốt trầm). */
+export function chime(good: boolean) {
+  if (!context) return;
+  const start = context.currentTime;
+  const notes = good ? [660, 990] : [220];
+  notes.forEach((frequency, i) => {
+    const oscillator = context!.createOscillator();
+    const gain = context!.createGain();
+    const at = start + i * 0.18;
+    const length = good ? 0.3 : 0.5;
+    oscillator.type = good ? 'sine' : 'triangle';
+    oscillator.frequency.value = frequency;
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.exponentialRampToValueAtTime(0.25, at + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + length);
+    oscillator.connect(gain).connect(context!.destination);
+    oscillator.start(at);
+    oscillator.stop(at + length + 0.05);
+  });
+}

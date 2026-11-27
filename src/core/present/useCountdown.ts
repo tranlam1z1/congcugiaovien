@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { secondsLeft, tick, toggle, type Timer } from './logic';
+import { secondsLeft, tick, toggle, type Timer } from './timer';
 import { ring, unlockSound } from './sound';
 
 const IDLE: Timer = { status: 'idle' };

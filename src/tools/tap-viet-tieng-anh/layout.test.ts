@@ -5,7 +5,7 @@ import { createHandwriting } from '@/core/handwriting/cursive';
 import { MAX_LINES, MAX_PAGES, parseLines } from '@/core/handwriting/lines';
 import { AREA_WIDTH, buildRows, geometry, layoutPages, scaleOf } from './layout';
 import { DEFAULTS, resolve, SIZES, type Options } from './options';
-import { pictureFor } from './pictures';
+import { pictureFor } from '@/core/vocab/pictures';
 import { PACKS, SAMPLES } from './words';
 import { cursiveWriter, printWriter, type Writer } from './writer';
 

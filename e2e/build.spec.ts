@@ -1,4 +1,6 @@
+import { readFile } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
+import { PDFDocument } from 'pdf-lib';
 
 test('HTML dựng sẵn có nội dung và thẻ SEO', async ({ request }) => {
   const html = await (await request.get('/giay-khen')).text();
@@ -55,6 +57,10 @@ for (const [slug, stored, expected] of [
   ['cong-cu-tren-lop', { tab: 'dem-nguoc', minutes: 7 }, '7:00'],
   ['tap-viet-chu', { text: 'mẹ', students: 'An\nBình' }, '2 trang A4'],
   ['tap-viet-tieng-anh', { lettering: 'cursive', text: 'cat', students: 'An\nBình' }, '2 trang A4'],
+  ['the-tu-vung-tieng-anh', { perPage: 4 }, '4 trang A4'],
+  ['nhan-xet-hoc-sinh', { pronoun: 'con' }, 'Chưa có học sinh.'],
+  ['tro-choi-on-tap', { tab: 'chuong-vang' }, 'Câu 1/6'],
+  ['cong-cu-pdf-anh', { tab: 'tach' }, 'Chọn file cần tách'],
 ] as const) {
   test(`${slug}: dựng sẵn và hydrate với tùy chọn đã lưu`, async ({ page, request }) => {
     const html = await (await request.get(`/${slug}`)).text();
@@ -73,6 +79,26 @@ for (const [slug, stored, expected] of [
     expect(errors).toEqual([]);
   });
 }
+
+test('cong-cu-pdf-anh: Web Worker và hình xem trước chạy trên bản build', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  const doc = await PDFDocument.create();
+  doc.addPage([200, 300]);
+  doc.addPage([200, 300]);
+  const file = { name: 'de.pdf', mimeType: 'application/pdf', buffer: Buffer.from(await doc.save()) };
+
+  await page.goto('/cong-cu-pdf-anh');
+  await page.getByRole('button', { name: 'Xoay, xoá, sắp xếp trang' }).click();
+  const region = page.getByRole('region', { name: 'Xoay, xoá, sắp xếp trang' });
+  await region.getByLabel('Chọn file PDF').setInputFiles(file);
+  await expect(region.locator('img[src^="data:image/jpeg"]')).toHaveCount(2);
+  const wait = page.waitForEvent('download');
+  await region.getByRole('button', { name: 'Lưu PDF' }).click();
+  const saved = await PDFDocument.load(await readFile(await (await wait).path()));
+  expect(saved.getPageCount()).toBe(2);
+  expect(errors).toEqual([]);
+});
 
 test('trang thử khung in không có trong bản build', async ({ page }) => {
   await page.goto('/_khung-thu');

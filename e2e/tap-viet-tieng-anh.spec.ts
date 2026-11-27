@@ -109,8 +109,9 @@ test('chữ và hình không đè đầu phiếu, không ra ngoài lề ở mọ
 test('gói từ vựng, mẫu có sẵn, hình, số dòng và danh sách học sinh', async ({ page }) => {
   await open(page);
   await select(page, 'Gói từ vựng theo lớp').selectOption({ label: 'Lớp 3 · Fruit' });
-  await expect(content(page)).toHaveValue('apple\nbanana\norange\ngrape\ncherry');
-  await expect(page.locator('.a4-page [data-picture]')).toHaveCount(5);
+  await expect(content(page)).toHaveValue('apple\nbanana\norange\ngrape\ncherry\nmango\nlemon\nwatermelon');
+  // Mango và watermelon chưa có hình.
+  await expect(page.locator('.a4-page [data-picture]')).toHaveCount(6);
   await page.getByRole('checkbox', { name: 'Kèm hình minh họa từ vựng' }).uncheck();
   await expect(page.locator('.a4-page [data-picture]')).toHaveCount(0);
 

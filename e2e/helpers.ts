@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { createCanvas } from '@napi-rs/canvas';
-import { expect, type Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 export const PT_PER_MM = 72 / 25.4;
@@ -59,9 +59,9 @@ export const pageCount = async (page: Page) => {
   return Number(label!.split(' ')[0]);
 };
 
-export async function downloadFile(page: Page, button: string) {
+export async function downloadFile(page: Page, button: string, within: Page | Locator = page) {
   const wait = page.waitForEvent('download');
-  await page.getByRole('button', { name: button }).click();
+  await within.getByRole('button', { name: button }).click();
   const download = await wait;
   return { name: download.suggestedFilename(), data: await readFile(await download.path()) };
 }

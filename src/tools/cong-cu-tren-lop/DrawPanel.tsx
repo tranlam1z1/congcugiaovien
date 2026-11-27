@@ -1,6 +1,6 @@
 import { ListOrdered, RotateCcw, Shuffle } from 'lucide-react';
 import { pickIndex, remaining, shuffled } from './logic';
-import { usePresenterKeys } from './usePresenterKeys';
+import { usePresenterKeys } from '@/core/present/usePresenterKeys';
 
 export function DrawPanel({
   items,

@@ -1,8 +1,8 @@
 import { Play, RotateCcw } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { pickIndex, remaining, spinTo, wheelLabel } from './logic';
-import { unlockSound } from './sound';
-import { usePresenterKeys } from './usePresenterKeys';
+import { unlockSound } from '@/core/present/sound';
+import { usePresenterKeys } from '@/core/present/usePresenterKeys';
 
 const SPIN_MS = 4000;
 const FILLS = ['#fde68a', '#bfdbfe', '#bbf7d0', '#fbcfe8', '#ddd6fe', '#fed7aa', '#a7f3d0'];

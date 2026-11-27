@@ -12,7 +12,7 @@ import { formatTime, keepKnown } from './logic';
 import { NoisePanel } from './NoisePanel';
 import { DrawFields, SensitivityField, TimeFields } from './OptionFields';
 import { DEFAULTS, drawItems, MAX_HISTORY, TAB_NAMES, TABS, toOptions } from './options';
-import { useCountdown } from './useCountdown';
+import { useCountdown } from '@/core/present/useCountdown';
 import { WheelPanel } from './WheelPanel';
 
 export default function CongCuTrenLop({ tool }: { tool: ToolMeta }) {

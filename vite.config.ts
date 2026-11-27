@@ -14,8 +14,10 @@ export default defineConfig({
       '@pdf-lib/fontkit',
       'idb-keyval',
       'pdf-lib',
+      'pdfjs-dist/legacy/build/pdf.mjs',
       'qrcode',
       'read-excel-file/browser',
+      'write-excel-file/browser',
     ],
   },
   test: {

@@ -1,0 +1,172 @@
+/**
+ * Từ vựng tiếng Anh theo lớp (tự soạn, từ thông dụng). Phiên âm theo giọng Anh - Anh.
+ * Giáo viên sửa được ngay trong công cụ.
+ */
+
+export type VocabEntry = { word: string; ipa: string; meaning: string };
+
+export type VocabPack = { id: string; grade: number; label: string; entries: VocabEntry[] };
+
+/** Mỗi từ một chuỗi "word|phiên âm|nghĩa". */
+const pack = (grade: number, topic: string, rows: string[]): VocabPack => ({
+  id: `${grade}-${topic.toLowerCase().replace(/\s+/g, '-')}`,
+  grade,
+  label: `Lớp ${grade} · ${topic}`,
+  entries: rows.map((row) => {
+    const [word = '', ipa = '', meaning = ''] = row.split('|');
+    return { word, ipa, meaning };
+  }),
+});
+
+export const VOCAB: VocabPack[] = [
+  pack(1, 'Animals', [
+    'cat|/kæt/|con mèo',
+    'dog|/dɒɡ/|con chó',
+    'fish|/fɪʃ/|con cá',
+    'bird|/bɜːd/|con chim',
+    'rabbit|/ˈræbɪt/|con thỏ',
+    'duck|/dʌk/|con vịt',
+    'pig|/pɪɡ/|con lợn',
+    'elephant|/ˈelɪfənt/|con voi',
+  ]),
+  pack(1, 'Colours', [
+    'red|/red/|màu đỏ',
+    'blue|/bluː/|màu xanh dương',
+    'green|/ɡriːn/|màu xanh lá',
+    'yellow|/ˈjeləʊ/|màu vàng',
+    'pink|/pɪŋk/|màu hồng',
+    'orange|/ˈɒrɪndʒ/|màu cam',
+    'black|/blæk/|màu đen',
+    'white|/waɪt/|màu trắng',
+  ]),
+  pack(1, 'Numbers', [
+    'one|/wʌn/|số một',
+    'two|/tuː/|số hai',
+    'three|/θriː/|số ba',
+    'four|/fɔː/|số bốn',
+    'five|/faɪv/|số năm',
+    'six|/sɪks/|số sáu',
+    'seven|/ˈsevən/|số bảy',
+    'eight|/eɪt/|số tám',
+  ]),
+  pack(2, 'School things', [
+    'book|/bʊk/|quyển sách',
+    'pen|/pen/|bút mực',
+    'pencil|/ˈpensəl/|bút chì',
+    'ruler|/ˈruːlə/|thước kẻ',
+    'eraser|/ɪˈreɪzə/|cục tẩy',
+    'bag|/bæɡ/|cái cặp',
+    'desk|/desk/|bàn học',
+    'scissors|/ˈsɪzəz/|cái kéo',
+  ]),
+  pack(2, 'Family', [
+    'mother|/ˈmʌðə/|mẹ',
+    'father|/ˈfɑːðə/|bố',
+    'sister|/ˈsɪstə/|chị gái, em gái',
+    'brother|/ˈbrʌðə/|anh trai, em trai',
+    'baby|/ˈbeɪbi/|em bé',
+    'grandmother|/ˈɡrænmʌðə/|bà',
+    'grandfather|/ˈɡrænfɑːðə/|ông',
+    'family|/ˈfæməli/|gia đình',
+  ]),
+  pack(2, 'Toys', [
+    'ball|/bɔːl/|quả bóng',
+    'kite|/kaɪt/|con diều',
+    'doll|/dɒl/|búp bê',
+    'robot|/ˈrəʊbɒt/|người máy',
+    'drum|/drʌm/|cái trống',
+    'balloon|/bəˈluːn/|bóng bay',
+    'yo-yo|/ˈjəʊjəʊ/|con quay yo-yo',
+    'puzzle|/ˈpʌzəl/|trò ghép hình',
+  ]),
+  pack(3, 'Fruit', [
+    'apple|/ˈæpəl/|quả táo',
+    'banana|/bəˈnɑːnə/|quả chuối',
+    'orange|/ˈɒrɪndʒ/|quả cam',
+    'grape|/ɡreɪp/|quả nho',
+    'cherry|/ˈtʃeri/|quả anh đào',
+    'mango|/ˈmæŋɡəʊ/|quả xoài',
+    'lemon|/ˈlemən/|quả chanh vàng',
+    'watermelon|/ˈwɔːtəmelən/|quả dưa hấu',
+  ]),
+  pack(3, 'Food and drink', [
+    'bread|/bred/|bánh mì',
+    'egg|/eɡ/|quả trứng',
+    'milk|/mɪlk/|sữa',
+    'cake|/keɪk/|bánh ngọt',
+    'juice|/dʒuːs/|nước ép',
+    'rice|/raɪs/|cơm, gạo',
+    'soup|/suːp/|món súp',
+    'water|/ˈwɔːtə/|nước',
+  ]),
+  pack(3, 'My body', [
+    'head|/hed/|cái đầu',
+    'hand|/hænd/|bàn tay',
+    'eye|/aɪ/|con mắt',
+    'ear|/ɪə/|cái tai',
+    'foot|/fʊt/|bàn chân',
+    'nose|/nəʊz/|cái mũi',
+    'mouth|/maʊθ/|cái miệng',
+    'hair|/heə/|mái tóc',
+  ]),
+  pack(4, 'Weather', [
+    'sunny|/ˈsʌni/|trời nắng',
+    'rainy|/ˈreɪni/|trời mưa',
+    'cloudy|/ˈklaʊdi/|nhiều mây',
+    'windy|/ˈwɪndi/|có gió',
+    'snowy|/ˈsnəʊi/|có tuyết',
+    'stormy|/ˈstɔːmi/|có bão',
+    'hot|/hɒt/|nóng',
+    'cold|/kəʊld/|lạnh',
+  ]),
+  pack(4, 'Clothes', [
+    'shirt|/ʃɜːt/|áo sơ mi',
+    'dress|/dres/|váy liền',
+    'shoes|/ʃuːz/|đôi giày',
+    'hat|/hæt/|cái mũ',
+    'socks|/sɒks/|đôi tất',
+    'skirt|/skɜːt/|chân váy',
+    'jacket|/ˈdʒækɪt/|áo khoác',
+    'trousers|/ˈtraʊzəz/|quần dài',
+  ]),
+  pack(4, 'Jobs', [
+    'teacher|/ˈtiːtʃə/|giáo viên',
+    'doctor|/ˈdɒktə/|bác sĩ',
+    'farmer|/ˈfɑːmə/|nông dân',
+    'driver|/ˈdraɪvə/|người lái xe',
+    'nurse|/nɜːs/|y tá',
+    'engineer|/ˌendʒɪˈnɪə/|kỹ sư',
+    'pilot|/ˈpaɪlət/|phi công',
+    'cook|/kʊk/|đầu bếp',
+  ]),
+  pack(5, 'Transport', [
+    'car|/kɑː/|ô tô',
+    'bus|/bʌs/|xe buýt',
+    'bike|/baɪk/|xe đạp',
+    'train|/treɪn/|tàu hỏa',
+    'plane|/pleɪn/|máy bay',
+    'boat|/bəʊt/|con thuyền',
+    'ship|/ʃɪp/|tàu thủy',
+    'truck|/trʌk/|xe tải',
+  ]),
+  pack(5, 'Places', [
+    'school|/skuːl/|trường học',
+    'library|/ˈlaɪbrəri/|thư viện',
+    'hospital|/ˈhɒspɪtəl/|bệnh viện',
+    'market|/ˈmɑːkɪt/|chợ',
+    'park|/pɑːk/|công viên',
+    'museum|/mjuˈziːəm/|bảo tàng',
+    'bookshop|/ˈbʊkʃɒp/|hiệu sách',
+    'zoo|/zuː/|vườn thú',
+  ]),
+  pack(5, 'Nature', [
+    'tree|/triː/|cái cây',
+    'flower|/ˈflaʊə/|bông hoa',
+    'mountain|/ˈmaʊntɪn/|ngọn núi',
+    'river|/ˈrɪvə/|dòng sông',
+    'rainbow|/ˈreɪnbəʊ/|cầu vồng',
+    'leaf|/liːf/|chiếc lá',
+    'sea|/siː/|biển',
+    'star|/stɑː/|ngôi sao',
+  ]),
+];

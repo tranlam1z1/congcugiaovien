@@ -29,6 +29,8 @@ export type ToolLayoutProps = {
   answerKey?: { checked: boolean; onChange: (checked: boolean) => void };
   /** Nút riêng của công cụ: Tải PNG, Xuất Word... (dùng class `btn`). */
   actions?: ReactNode;
+  /** Phần sửa nội dung nằm trên bản xem trước. */
+  editor?: ReactNode;
 };
 
 /** Khung chung mọi công cụ: tùy chọn, xem trước A4, thanh hành động. */
@@ -44,6 +46,7 @@ export function ToolLayout({
   seed,
   answerKey,
   actions,
+  editor,
 }: ToolLayoutProps) {
   const canPrint = tool.mode === 'print' || tool.mode === 'both';
   const canPresent = (tool.mode === 'present' || tool.mode === 'both') && stage !== undefined;
@@ -180,6 +183,7 @@ export function ToolLayout({
           </div>
         )}
         {alert}
+        {editor}
         {canPrint && (
           <PrintPreview
             orientation={orientation}

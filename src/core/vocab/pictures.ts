@@ -7,7 +7,8 @@ import {
   Milk, Moon, Mountain, Music, Pencil, Pen, Piano, Pizza, Plane, Rabbit, Rainbow, Rat, Rocket,
   Ruler, Sailboat, Sandwich, School, Scissors, Ship, Shirt, Smartphone, Snail, Snowflake, Sofa,
   Soup, Squirrel, Star, Store, Sun, Tractor, TrainFront, TreeDeciduous, Truck, Turtle, Tv,
-  Umbrella, Volleyball, Watch, Wind, type LucideIcon,
+  Umbrella, Volleyball, Watch, Wind, Balloon, BookOpen, CloudLightning, GlassWater, Landmark,
+  Puzzle, Stethoscope, ThermometerSnowflake, ThermometerSun, Waves, type LucideIcon,
 } from 'lucide-react';
 
 const PICTURES: Record<string, LucideIcon> = {
@@ -27,7 +28,9 @@ const PICTURES: Record<string, LucideIcon> = {
   snow: Snowflake, snowy: Snowflake, sofa: Sofa, soup: Soup, squirrel: Squirrel, star: Star,
   market: Store, shop: Store, sun: Sun, sunny: Sun, tractor: Tractor, train: TrainFront,
   tree: TreeDeciduous, truck: Truck, turtle: Turtle, tv: Tv, umbrella: Umbrella,
-  ball: Volleyball, watch: Watch, wind: Wind, windy: Wind,
+  ball: Volleyball, watch: Watch, wind: Wind, windy: Wind, balloon: Balloon, bookshop: BookOpen,
+  stormy: CloudLightning, water: GlassWater, museum: Landmark, puzzle: Puzzle,
+  doctor: Stethoscope, cold: ThermometerSnowflake, hot: ThermometerSun, sea: Waves,
 };
 
 /** Hình cho một dòng chỉ gồm đúng một từ (nhận cả số nhiều thêm "s", "es"). */

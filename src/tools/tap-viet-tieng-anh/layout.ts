@@ -4,7 +4,7 @@ import { A4, paginate } from '@/core/print/paper';
 import { sheetHeaderHeight } from '@/core/print/SheetHeader';
 import type { LucideIcon } from 'lucide-react';
 import type { Settings } from './options';
-import { pictureFor } from './pictures';
+import { pictureFor } from '@/core/vocab/pictures';
 import type { Writer } from './writer';
 
 export const MARGIN_MM = 10;
