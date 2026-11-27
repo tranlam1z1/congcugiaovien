@@ -1,7 +1,7 @@
 import { CheckboxField, NumberField, SelectField, TextAreaField } from '@/components/fields';
+import { COLORS } from '@/core/handwriting/style';
 import {
   CELLS,
-  COLORS,
   MAX_ROWS_PER_SAMPLE,
   PAPERS,
   SAMPLES,

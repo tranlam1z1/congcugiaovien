@@ -11,10 +11,12 @@
 import {
   concatTransformationMatrix,
   LineCapStyle,
+  LineJoinStyle,
   PDFDocument,
   popGraphicsState,
   pushGraphicsState,
   rgb,
+  setLineJoin,
   type PDFFont,
   type PDFImage,
   type PDFPage,
@@ -362,6 +364,10 @@ export async function buildPdf(root: ParentNode, options: { title?: string } = {
       if (!d || (!hasFill && !hasStroke)) continue;
       const dash = style.strokeDasharray;
       ctx.page.pushOperators(pushGraphicsState(), matrix);
+      // drawSvgPath không đặt kiểu góc nên đặt trước, trong cùng trạng thái đồ họa.
+      if (hasStroke && style.strokeLinejoin === 'round') {
+        ctx.page.pushOperators(setLineJoin(LineJoinStyle.Round));
+      }
       ctx.page.drawSvgPath(d, {
         x: 0,
         y: 0,

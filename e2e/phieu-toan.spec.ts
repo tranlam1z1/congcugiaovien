@@ -190,9 +190,10 @@ test('bản in của trình duyệt đúng số trang xem trước', async ({ pa
   await openGroup(page, 'Bố cục và chữ');
   await page.getByRole('spinbutton', { name: 'Số câu' }).fill('100');
   await page.getByRole('spinbutton', { name: 'Số cột' }).fill('2');
-  const label = await page.getByText(/^\d+ trang A4$/).textContent();
+  // Bản xem trước đếm lại trang sau một nhịp: 3 trang câu hỏi và 1 trang đáp án.
+  await expect(page.getByText('4 trang A4')).toBeVisible();
   const printed = await pdfPages(await page.pdf({ preferCSSPageSize: true }));
-  expect(printed).toHaveLength(Number(label!.split(' ')[0]));
+  expect(printed).toHaveLength(4);
 });
 
 test('điện thoại 375px: đổi tùy chọn trong ngăn kéo, không tràn ngang', async ({ page }) => {

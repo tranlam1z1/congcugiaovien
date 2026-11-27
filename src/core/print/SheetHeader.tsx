@@ -1,6 +1,15 @@
 /** Độ dài tối đa của tiêu đề và tên trường: đủ để đầu phiếu gọn trong phần đã chừa. */
 export const MAX_HEADING_LENGTH = 60;
 
+/** Chiều cao (mm) cần chừa cho đầu phiếu rộng `width` mm, ước lượng dư để không đè nội dung. */
+export function sheetHeaderHeight(
+  { title, school, showNameLine }: { title: string; school: string; showNameLine: boolean },
+  width: number,
+) {
+  const titleLines = Math.ceil((title.length * 3.8) / width);
+  return (school ? 6 : 0) + (showNameLine ? 9 : 0) + 3 + titleLines * 9 + 5;
+}
+
 /** Đầu phiếu chung (PRD 4.0): trường/lớp, tiêu đề, dòng "Họ và tên / Lớp". */
 export function SheetHeader({
   title,

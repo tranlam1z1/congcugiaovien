@@ -1,20 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { describe, expect, it } from 'vitest';
-import { createHandwriting } from './handwriting';
-import {
-  buildRows,
-  grid,
-  headerHeight,
-  layoutPages,
-  MAX_LINES,
-  MAX_PAGES,
-  MAX_TOTAL_PAGES,
-  parseLines,
-  scaleOf,
-  studentLimit,
-  wrap,
-} from './layout';
+import { createHandwriting } from '@/core/handwriting/cursive';
+import { MAX_LINES, MAX_PAGES, parseLines } from '@/core/handwriting/lines';
+import { buildRows, grid, layoutPages, scaleOf } from './layout';
 import { CELLS, DEFAULTS, resolve, SAMPLES, SIZES, type Options } from './options';
 
 const file = createRequire(import.meta.url).resolve(
@@ -29,22 +18,11 @@ const build = (options: Partial<Options>) => {
   return { settings, rows, ...layoutPages(rows, settings) };
 };
 
-describe('đọc nội dung', () => {
-  it('bỏ dòng trống, gộp khoảng trắng, chuẩn hoá dấu', () => {
-    expect(parseLines('  bé   yêu \r\n\r\n\tmẹ ')).toEqual(['bé yêu', 'mẹ']);
-    expect(parseLines('á')).toEqual(['á']);
-    expect(parseLines('a\n'.repeat(MAX_LINES + 20))).toHaveLength(MAX_LINES);
-  });
-
-  it('ngắt dòng theo từ, từ quá dài thì ngắt theo ký tự', () => {
-    const fits = (text: string) => text.length <= 6;
-    expect(wrap('bé đi học về nhà', fits)).toEqual(['bé đi', 'học về', 'nhà']);
-    expect(wrap('abcdefghij kl', fits)).toEqual(['abcdef', 'ghij', 'kl']);
-    expect(wrap('ab', () => false)).toEqual(['a', 'b']);
-  });
-});
-
 describe('dòng tập viết', () => {
+  it('font viết được mọi mẫu có sẵn', () => {
+    expect(font.missing(SAMPLES.map((s) => s.text).join(' '))).toEqual([]);
+  });
+
   it('mỗi mẫu có đúng số dòng chữ và dòng trống', () => {
     const { rows } = build({ text: 'a\nb', rows: 3, blanks: 2 });
     expect(rows.map((r) => (r.at.length ? r.text : `(${r.text})`))).toEqual([
@@ -87,7 +65,7 @@ describe('dòng tập viết', () => {
         const label = `${size} ô × ${cell} mm`;
         const { rows, pages, settings } = build({ text, size, cell, rows: 1, blanks: 0 });
         const area = grid(settings);
-        expect(headerHeight(settings) + area.height, label).toBeLessThanOrEqual(277);
+        expect(area.header + area.height, label).toBeLessThanOrEqual(277);
         expect(area.width, label).toBeLessThanOrEqual(190);
         for (const row of rows) {
           const shape = font.shape(row.text);
@@ -123,13 +101,6 @@ describe('dòng tập viết', () => {
   it('nội dung trống hoặc toàn ký tự lạ thì không có trang', () => {
     expect(build({ text: '' }).pages).toEqual([]);
     expect(build({ text: '汉字' }).pages).toEqual([]);
-  });
-
-  it('số học sinh không làm vượt tổng số trang', () => {
-    expect(studentLimit(1)).toBe(60);
-    for (let pages = 1; pages <= MAX_PAGES; pages++) {
-      expect(studentLimit(pages) * pages).toBeLessThanOrEqual(MAX_TOTAL_PAGES);
-    }
   });
 
   it('tùy chọn đã lưu sai được đưa về giá trị hợp lệ', () => {

@@ -1,23 +1,13 @@
 import { useMemo } from 'react';
+import { dotsPath, outlinePath, type Handwriting } from '@/core/handwriting/cursive';
+import { pens } from '@/core/handwriting/style';
 import { A4Page } from '@/core/print/A4Page';
 import { SheetHeader } from '@/core/print/SheetHeader';
-import { dotsPath, outlinePath, type Handwriting } from './handwriting';
 import { grid, MARGIN_MM, scaleOf, type Row } from './layout';
 import type { Settings } from './options';
 
 const GRID_COLOR = '#93b4d8';
 const GUIDE_COLOR = '#4a74a8';
-
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
-
-/** Bề dày nét, cỡ chấm và khoảng cách chấm (mm) theo chiều cao chữ thường. */
-function pens(xHeight: number) {
-  return {
-    outline: clamp(xHeight * 0.025, 0.2, 0.45),
-    dot: clamp(0.4 + (xHeight - 4) * 0.025, 0.4, 0.9),
-    spacing: clamp(0.9 + (xHeight - 4) * 0.08, 0.9, 2.4),
-  };
-}
 
 /** Đường nét của mỗi dòng chữ, dựng một lần rồi dùng lại cho mọi chỗ lặp. */
 export type Glyphs = (text: string) => { solid: string; dots: string };

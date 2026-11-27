@@ -8,8 +8,7 @@ import {
   flatten,
   outlinePath,
   STEM,
-} from './handwriting';
-import { SAMPLES } from './options';
+} from './cursive';
 
 const file = createRequire(import.meta.url).resolve(
   '@expo-google-fonts/playwrite-vn/400Regular/PlaywriteVN_400Regular.ttf',
@@ -32,10 +31,10 @@ function distanceToOutline([x, y]: [number, number], contours: [number, number][
 }
 
 describe('font tập viết', () => {
-  it('viết được mọi mẫu có sẵn và mọi chữ tiếng Việt', () => {
+  it('viết được mọi chữ tiếng Việt, tiếng Anh và chữ số', () => {
     const letters =
       'aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệghiìỉĩíịklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvxyỳỷỹýỵ';
-    const all = [letters, letters.toLocaleUpperCase('vi'), ...SAMPLES.map((s) => s.text)].join(' ');
+    const all = `${letters} ${letters.toLocaleUpperCase('vi')} fjwz FJWZ 0123456789 .,;:!?'"()-`;
     expect(font.missing(all)).toEqual([]);
     for (const char of letters + letters.toLocaleUpperCase('vi')) {
       expect(font.shape(char).commands.length, char).toBeGreaterThan(0);

@@ -1,4 +1,5 @@
 /** Tùy chọn, mẫu có sẵn và cách ép tùy chọn đã lưu về giá trị hợp lệ. */
+import { COLORS, type Color } from '@/core/handwriting/style';
 
 export const SIZES = [1, 1.5, 2, 3] as const;
 export const CELLS = [4, 5, 6, 8] as const;
@@ -16,14 +17,6 @@ export const STYLES = [
   { value: 'rong', label: 'Viền rỗng' },
 ] as const;
 export type TraceStyle = (typeof STYLES)[number]['value'];
-
-export const COLORS = [
-  { value: 'den', label: 'Xám đen', hex: '#1f2937' },
-  { value: 'xanh-duong', label: 'Xanh dương', hex: '#1d4ed8' },
-  { value: 'do', label: 'Đỏ', hex: '#dc2626' },
-  { value: 'xanh-la', label: 'Xanh lá', hex: '#15803d' },
-] as const;
-export type Color = (typeof COLORS)[number]['value'];
 
 const list = (text: string) => text.split(' ').join('\n');
 

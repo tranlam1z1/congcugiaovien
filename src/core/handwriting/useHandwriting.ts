@@ -1,6 +1,6 @@
 import regular from '@expo-google-fonts/playwrite-vn/400Regular/PlaywriteVN_400Regular.ttf?url';
 import { useEffect, useState } from 'react';
-import { createHandwriting, type Handwriting } from './handwriting';
+import { createHandwriting, type Handwriting } from './cursive';
 
 let loading: Promise<Handwriting> | null = null;
 
@@ -19,7 +19,7 @@ function load() {
 }
 
 /** Font chữ viết tay; `failed` khi không tải được, `retry` để thử lại. */
-export function useHandwriting() {
+export function useHandwriting(enabled = true) {
   const [state, setState] = useState<{ font: Handwriting | null; failed: boolean }>({
     font: null,
     failed: false,
@@ -27,6 +27,7 @@ export function useHandwriting() {
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    if (!enabled) return;
     let current = true;
     setState({ font: null, failed: false });
     load()
@@ -38,7 +39,7 @@ export function useHandwriting() {
     return () => {
       current = false;
     };
-  }, [attempt]);
+  }, [attempt, enabled]);
 
   return { ...state, retry: () => setAttempt((n) => n + 1) };
 }

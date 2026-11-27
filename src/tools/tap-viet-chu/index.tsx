@@ -3,15 +3,16 @@ import { HeaderFields } from '@/components/CommonOptionFields';
 import { COMMON_DEFAULTS } from '@/components/commonOptions';
 import { StudentListInput } from '@/components/StudentListInput';
 import { ToolLayout } from '@/components/ToolLayout';
+import type { Handwriting } from '@/core/handwriting/cursive';
+import { MAX_PAGES, parseLines, studentLimit } from '@/core/handwriting/lines';
+import { useHandwriting } from '@/core/handwriting/useHandwriting';
 import { useToolOptions } from '@/core/storage/useToolOptions';
 import { parseStudentList } from '@/core/studentList';
 import type { ToolMeta } from '@/core/types';
-import type { Handwriting } from './handwriting';
-import { buildRows, layoutPages, MAX_PAGES, parseLines, studentLimit } from './layout';
+import { buildRows, layoutPages } from './layout';
 import { ContentFields, RowFields, SizeFields, StyleFields } from './OptionFields';
 import { DEFAULT_TITLE, DEFAULTS, resolve, type Options } from './options';
 import { useGlyphs, WritingPage } from './Pages';
-import { useHandwriting } from './useHandwriting';
 
 export default function TapVietChu({ tool }: { tool: ToolMeta }) {
   const [options, patch, reset] = useToolOptions(tool.slug, DEFAULTS);
