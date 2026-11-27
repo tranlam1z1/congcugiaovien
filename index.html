@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!--seo-start-->
+    <title>Kho Công Cụ Giáo Viên</title>
+    <meta name="description" content="Công cụ in ấn và tương tác cho giáo viên Việt Nam, chạy ngay trên máy bạn." />
+    <!--seo-end-->
+    <script>
+      // Đặt giao diện sáng/tối trước khi vẽ để không bị nháy.
+      try {
+        var t = JSON.parse(localStorage.getItem('kcc:theme'));
+        if (t !== 'light' && t !== 'dark') {
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
